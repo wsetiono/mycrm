@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRM System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>EduCRM - Customer Relationship Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         :root {
@@ -18,45 +18,27 @@
             --danger-color: #fb5607;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f7fb;
-            color: var(--dark-color);
+            color: #333;
         }
 
         .login-container {
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 20px;
         }
 
         .login-card {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
             width: 100%;
             max-width: 400px;
-        }
-
-        .login-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .login-body {
-            padding: 30px;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background-color: white;
         }
 
         .dashboard-container {
@@ -65,38 +47,36 @@
         }
 
         .sidebar {
-            background: white;
-            height: 100vh;
+            background-color: var(--dark-color);
+            color: white;
+            min-height: 100vh;
             position: fixed;
             width: 250px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
             z-index: 100;
             transition: all 0.3s;
         }
 
         .sidebar-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 20px;
+            padding: 1.5rem;
+            background-color: var(--secondary-color);
             text-align: center;
         }
 
         .sidebar-menu {
-            padding: 20px 0;
+            padding: 1rem 0;
         }
 
         .sidebar-menu .nav-link {
-            color: var(--dark-color);
-            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.8rem 1.5rem;
             display: flex;
             align-items: center;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .sidebar-menu .nav-link:hover, .sidebar-menu .nav-link.active {
-            background-color: rgba(67, 97, 238, 0.1);
-            color: var(--primary-color);
-            border-left: 4px solid var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
         }
 
         .sidebar-menu .nav-link i {
@@ -105,137 +85,128 @@
 
         .main-content {
             margin-left: 250px;
-            padding: 20px;
-        }
-
-        .top-header {
-            background: white;
-            border-radius: 10px;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
+            padding: 2rem;
         }
 
         .content-section {
             display: none;
-            animation: fadeIn 0.5s;
         }
 
         .content-section.active {
             display: block;
+            animation: fadeIn 0.3s;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .card {
-            border: none;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: none;
+            margin-bottom: 1.5rem;
         }
 
         .card-header {
-            background: white;
+            background-color: white;
             border-bottom: 1px solid #eee;
-            padding: 15px 20px;
+            padding: 1rem 1.5rem;
             font-weight: 600;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border: none;
-            border-radius: 5px;
-            padding: 8px 20px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
         }
 
         .stats-card {
-            background: white;
             border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
         }
 
-        .stats-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .stats-card.primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
         }
 
-        .stats-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            display: flex;
+        .stats-card.success {
+            background: linear-gradient(135deg, #06ffa5, #00b4d8);
+        }
+
+        .stats-card.warning {
+            background: linear-gradient(135deg, var(--warning-color), #f77f00);
+        }
+
+        .stats-card.danger {
+            background: linear-gradient(135deg, var(--danger-color), #d62828);
+        }
+
+        .customer-table {
+            width: 100%;
+        }
+
+        .customer-table th {
+            background-color: var(--light-color);
+            font-weight: 600;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.25rem;
+        }
+
+        .tag.excel {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .tag.python {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .tag.web-dev {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+
+        .tag.data-science {
+            background-color: #f3e5f5;
+            color: #6a1b9a;
+        }
+
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            margin-bottom: 15px;
+            transition: all 0.2s;
         }
 
-        .table-container {
-            overflow-x: auto;
-        }
-
-        .table {
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-
-        .table thead th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-            border: none;
-            padding: 12px 15px;
-        }
-
-        .table tbody td {
-            padding: 12px 15px;
-            vertical-align: middle;
-            border-bottom: 1px solid #eee;
-        }
-
-        .badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-
-        .form-control, .form-select {
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            padding: 10px 15px;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+        .whatsapp-btn:hover {
+            background-color: #128c7e;
+            transform: scale(1.1);
         }
 
         .template-card {
             border: 1px solid #eee;
             border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 15px;
+            padding: 1rem;
+            margin-bottom: 1rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
         }
 
         .template-card:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .template-card.selected {
@@ -244,22 +215,21 @@
         }
 
         .chart-container {
-            position: relative;
             height: 300px;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
 
         .notification {
             position: fixed;
             top: 20px;
             right: 20px;
-            padding: 15px 20px;
-            border-radius: 5px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
             color: white;
-            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             z-index: 1000;
-            animation: slideIn 0.3s, slideOut 0.3s 2.7s;
-            animation-fill-mode: forwards;
+            display: none;
+            animation: slideIn 0.3s;
         }
 
         @keyframes slideIn {
@@ -267,65 +237,47 @@
             to { transform: translateX(0); }
         }
 
-        @keyframes slideOut {
-            from { transform: translateX(0); }
-            to { transform: translateX(100%); }
-        }
-
         .notification.success {
             background-color: var(--success-color);
-            color: var(--dark-color);
+            color: #333;
         }
 
         .notification.error {
             background-color: var(--danger-color);
         }
 
-        .notification.info {
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 101;
             background-color: var(--primary-color);
-        }
-
-        .whatsapp-btn {
-            background-color: #25D366;
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
-            color: white;
-        }
-
-        .modal-content {
-            border-radius: 10px;
-            border: none;
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .modal-footer {
-            border-top: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         @media (max-width: 768px) {
             .sidebar {
-                width: 70px;
+                transform: translateX(-100%);
             }
-            
-            .sidebar-header h3, .sidebar-menu .nav-link span {
-                display: none;
+
+            .sidebar.active {
+                transform: translateX(0);
             }
-            
+
             .main-content {
-                margin-left: 70px;
+                margin-left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
             }
         }
     </style>
@@ -334,102 +286,65 @@
     <!-- Login Page -->
     <div class="login-container" id="loginPage">
         <div class="login-card">
-            <div class="login-header">
-                <h3>CRM System</h3>
-                <p>Customer Relationship Management</p>
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">EduCRM</h2>
+                <p class="text-muted">Customer Relationship Management</p>
             </div>
-            <div class="login-body">
-                <form id="loginForm">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="role" class="form-label">Role</label>
-                        <select class="form-select" id="role" required>
-                            <option value="" selected disabled>Select Role</option>
-                            <option value="customer">Customer</option>
-                            <option value="admin">Admin</option>
-                            <option value="marketing">Marketing</option>
-                        </select>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </div>
-                    <div class="mt-3 text-center">
-                        <small class="text-muted">
-                            Demo Credentials:<br>
-                            Customer: customer/password<br>
-                            Admin: admin/password<br>
-                            Marketing: marketing/password
-                        </small>
-                    </div>
-                </form>
-            </div>
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <div class="mt-3 text-center">
+                    <small class="text-muted">Use: admin / admin123</small>
+                </div>
+            </form>
         </div>
     </div>
 
     <!-- Dashboard -->
     <div class="dashboard-container" id="dashboardPage">
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <i class="bi bi-list"></i>
+        </button>
+
         <!-- Sidebar -->
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <h3>CRM System</h3>
-                <p id="userRole">Role: </p>
+                <h4>EduCRM</h4>
+                <p class="mb-0 small">Welcome, Admin</p>
             </div>
             <div class="sidebar-menu">
                 <nav class="nav flex-column">
-                    <a class="nav-link active" href="#" data-section="dashboard">
-                        <i class="bi bi-speedometer2"></i>
-                        <span>Dashboard</span>
+                    <a href="#" class="nav-link active" data-section="dashboard">
+                        <i class="bi bi-speedometer2"></i> Dashboard
                     </a>
-                    
-                    <!-- Customer Menu -->
-                    <a class="nav-link" href="#" data-section="registration" id="registrationLink" style="display:none;">
-                        <i class="bi bi-person-plus"></i>
-                        <span>Registration</span>
+                    <a href="#" class="nav-link" data-section="customer-registration">
+                        <i class="bi bi-person-plus"></i> Customer Registration
                     </a>
-                    <a class="nav-link" href="#" data-section="myProfile" id="myProfileLink" style="display:none;">
-                        <i class="bi bi-person"></i>
-                        <span>My Profile</span>
+                    <a href="#" class="nav-link" data-section="customer-data">
+                        <i class="bi bi-people"></i> Customer Data
                     </a>
-                    
-                    <!-- Admin Menu -->
-                    <a class="nav-link" href="#" data-section="users" id="usersLink" style="display:none;">
-                        <i class="bi bi-people"></i>
-                        <span>Users</span>
+                    <a href="#" class="nav-link" data-section="whatsapp-marketing">
+                        <i class="bi bi-whatsapp"></i> WhatsApp Marketing
                     </a>
-                    
-                    <!-- Marketing Menu -->
-                    <a class="nav-link" href="#" data-section="customers" id="customersLink" style="display:none;">
-                        <i class="bi bi-people-fill"></i>
-                        <span>Customer Data</span>
+                    <a href="#" class="nav-link" data-section="birthday-campaigns">
+                        <i class="bi bi-gift"></i> Birthday Campaigns
                     </a>
-                    <a class="nav-link" href="#" data-section="whatsapp" id="whatsappLink" style="display:none;">
-                        <i class="bi bi-whatsapp"></i>
-                        <span>WhatsApp Marketing</span>
+                    <a href="#" class="nav-link" data-section="loyalty-features">
+                        <i class="bi bi-award"></i> Loyalty Features
                     </a>
-                    <a class="nav-link" href="#" data-section="birthday" id="birthdayLink" style="display:none;">
-                        <i class="bi bi-gift"></i>
-                        <span>Birthday Campaigns</span>
+                    <a href="#" class="nav-link" data-section="analytics">
+                        <i class="bi bi-graph-up"></i> Analytics
                     </a>
-                    <a class="nav-link" href="#" data-section="loyalty" id="loyaltyLink" style="display:none;">
-                        <i class="bi bi-award"></i>
-                        <span>Loyalty Features</span>
-                    </a>
-                    <a class="nav-link" href="#" data-section="analytics" id="analyticsLink" style="display:none;">
-                        <i class="bi bi-graph-up"></i>
-                        <span>Analytics</span>
-                    </a>
-                    
-                    <!-- Common Menu -->
-                    <a class="nav-link" href="#" id="logoutLink">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span>Logout</span>
+                    <a href="#" class="nav-link" id="logoutBtn">
+                        <i class="bi bi-box-arrow-right"></i> Logout
                     </a>
                 </nav>
             </div>
@@ -437,464 +352,98 @@
 
         <!-- Main Content -->
         <div class="main-content">
-            <!-- Top Header -->
-            <div class="top-header">
-                <h4 id="pageTitle">Dashboard</h4>
-                <div>
-                    <span id="currentUser">Welcome, </span>
-                    <button class="btn btn-sm btn-outline-secondary" id="toggleSidebar">
-                        <i class="bi bi-list"></i>
-                    </button>
-                </div>
-            </div>
-
             <!-- Dashboard Section -->
-            <div class="content-section active" id="dashboardSection">
+            <div class="content-section active" id="dashboard-section">
+                <h2 class="mb-4">Dashboard</h2>
+                
                 <div class="row">
-                    <div class="col-md-3 mb-4">
-                        <div class="stats-card">
-                            <div class="stats-icon bg-primary bg-opacity-10 text-primary">
-                                <i class="bi bi-people-fill"></i>
-                            </div>
-                            <h5>Total Customers</h5>
-                            <h2 id="totalCustomers">0</h2>
-                            <small class="text-success"><i class="bi bi-arrow-up"></i> 12% from last month</small>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-4">
-                        <div class="stats-card">
-                            <div class="stats-icon bg-success bg-opacity-10 text-success">
-                                <i class="bi bi-cart-check"></i>
-                            </div>
-                            <h5>Total Sales</h5>
-                            <h2 id="totalSales">$0</h2>
-                            <small class="text-success"><i class="bi bi-arrow-up"></i> 8% from last month</small>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-4">
-                        <div class="stats-card">
-                            <div class="stats-icon bg-warning bg-opacity-10 text-warning">
-                                <i class="bi bi-book"></i>
-                            </div>
-                            <h5>Active Courses</h5>
-                            <h2 id="activeCourses">0</h2>
-                            <small class="text-muted">5 courses this month</small>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-4">
-                        <div class="stats-card">
-                            <div class="stats-icon bg-info bg-opacity-10 text-info">
-                                <i class="bi bi-graph-up-arrow"></i>
-                            </div>
-                            <h5>Conversion Rate</h5>
-                            <h2 id="conversionRate">0%</h2>
-                            <small class="text-success"><i class="bi bi-arrow-up"></i> 3% from last month</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Sales Overview</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas id="salesChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Recent Activities</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="activity-list" id="activityList">
-                                    <!-- Activities will be added dynamically -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Registration Section (Customer) -->
-            <div class="content-section" id="registrationSection">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Customer Registration</h5>
-                    </div>
-                    <div class="card-body">
-                        <form id="customerRegistrationForm">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="lastName" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="phone" class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone" required>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="birthdate" class="form-label">Birthdate</label>
-                                    <input type="date" class="form-control" id="birthdate" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="location" class="form-label">Location</label>
-                                    <input type="text" class="form-control" id="location" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="courseType" class="form-label">Course Type</label>
-                                <select class="form-select" id="courseType" required>
-                                    <option value="" selected disabled>Select Course Type</option>
-                                    <option value="Basic Excel">Basic Excel</option>
-                                    <option value="Advanced Excel">Advanced Excel</option>
-                                    <option value="Data Analysis">Data Analysis</option>
-                                    <option value="Financial Modeling">Financial Modeling</option>
-                                    <option value="VBA Programming">VBA Programming</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="notes" class="form-label">Additional Notes</label>
-                                <textarea class="form-control" id="notes" rows="3"></textarea>
-                            </div>
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">Register</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- My Profile Section (Customer) -->
-            <div class="content-section" id="myProfileSection">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>My Profile</h5>
-                    </div>
-                    <div class="card-body">
-                        <div id="customerProfileInfo">
-                            <!-- Profile info will be displayed here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Users Section (Admin) -->
-            <div class="content-section" id="usersSection">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5>Users Management</h5>
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                            <i class="bi bi-plus-circle"></i> Add User
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-container">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="usersTableBody">
-                                    <!-- Users will be added dynamically -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Customers Section (Marketing) -->
-            <div class="content-section" id="customersSection">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5>Customer Data</h5>
-                        <div>
-                            <input type="text" class="form-control form-control-sm d-inline-block" id="customerSearch" placeholder="Search customers..." style="width: 200px;">
-                            <button class="btn btn-primary btn-sm ms-2" id="filterCustomers">
-                                <i class="bi bi-funnel"></i> Filter
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-container">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Location</th>
-                                        <th>Course Type</th>
-                                        <th>Join Date</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="customersTableBody">
-                                    <!-- Customers will be added dynamically -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- WhatsApp Marketing Section (Marketing) -->
-            <div class="content-section" id="whatsappSection">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>WhatsApp Marketing Templates</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Promo Templates</h6>
-                                <div class="template-card" data-template="promo1">
-                                    <h6>Weekend Special</h6>
-                                    <p>"Enroll in Advanced Excel this weekend—20% off for alumni!"</p>
-                                </div>
-                                <div class="template-card" data-template="promo2">
-                                    <h6>Flash Sale</h6>
-                                    <p>"Limited time offer! Get 30% off on Data Analysis course. Register now!"</p>
-                                </div>
-                                <div class="template-card" data-template="promo3">
-                                    <h6>Bundle Deal</h6>
-                                    <p>"Buy any 2 courses and get the 3rd one free. Limited seats available!"</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>Retargeting Templates</h6>
-                                <div class="template-card" data-template="retarget1">
-                                    <h6>Inactive Customer</h6>
-                                    <p>"It's been 3 months since your last class—ready to continue?"</p>
-                                </div>
-                                <div class="template-card" data-template="retarget2">
-                                    <h6>Course Reminder</h6>
-                                    <p>"Your course starts tomorrow! Don't forget to join the session at 10 AM."</p>
-                                </div>
-                                <div class="template-card" data-template="retarget3">
-                                    <h6>Course Completion</h6>
-                                    <p>"Congratulations on completing your course! Ready for the next level?"</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <h6>Selected Template Preview</h6>
-                            <div class="border p-3 rounded" id="templatePreview">
-                                <p>Select a template to preview</p>
-                            </div>
-                            <div class="mt-3">
-                                <button class="btn btn-primary" id="sendWhatsAppPromo" disabled>Send to Selected Customers</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Birthday Campaigns Section (Marketing) -->
-            <div class="content-section" id="birthdaySection">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Birthday and Milestone Campaigns</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Birthday Templates</h6>
-                                <div class="template-card" data-template="birthday1">
-                                    <h6>Simple Birthday</h6>
-                                    <p>"Happy Birthday, [Name]! 🎉 Enjoy 25% off any course this month."</p>
-                                </div>
-                                <div class="template-card" data-template="birthday2">
-                                    <h6>Birthday with Gift</h6>
-                                    <p>"Happy Birthday, [Name]! 🎂 We've added a free class voucher to your account. Enjoy your special day!"</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>Anniversary Templates</h6>
-                                <div class="template-card" data-template="anniversary1">
-                                    <h6>1 Year Anniversary</h6>
-                                    <p>"Congratulations! It's been 1 year since your first course. Here's a special loyalty reward for you!"</p>
-                                </div>
-                                <div class="template-card" data-template="anniversary2">
-                                    <h6>Course Completion</h6>
-                                    <p>"Amazing milestone! You've completed 5 courses with us. Enjoy a special discount on your next enrollment!"</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <h6>Upcoming Birthdays</h6>
-                            <div class="table-container">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Birthday</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="upcomingBirthdaysTableBody">
-                                        <!-- Upcoming birthdays will be added dynamically -->
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="mt-3">
-                                <h6>Selected Template Preview</h6>
-                                <div class="border p-3 rounded" id="birthdayTemplatePreview">
-                                    <p>Select a template to preview</p>
-                                </div>
-                                <div class="mt-3">
-                                    <button class="btn btn-primary" id="sendBirthdayMessage" disabled>Send Birthday Message</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Loyalty Features Section (Marketing) -->
-            <div class="content-section" id="loyaltySection">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Repeat Purchase and Loyalty Features</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Course Progression Templates</h6>
-                                <div class="template-card" data-template="progression1">
-                                    <h6>Next Level Course</h6>
-                                    <p>"Based on your recent completion of Basic Excel, we recommend Advanced Excel. Continue your learning journey!"</p>
-                                </div>
-                                <div class="template-card" data-template="progression2">
-                                    <h6>Related Course</h6>
-                                    <p>"Since you enjoyed Data Analysis, you might be interested in our Financial Modeling course. Check it out!"</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>Loyalty & Referral Templates</h6>
-                                <div class="template-card" data-template="loyalty1">
-                                    <h6>Loyalty Points</h6>
-                                    <p>"You've earned 50 loyalty points! Redeem them for discounts on your next course."</p>
-                                </div>
-                                <div class="template-card" data-template="referral1">
-                                    <h6>Referral Program</h6>
-                                    <p>"Refer a friend and earn a free session! Share your unique referral code: [CODE]"</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <h6>Selected Template Preview</h6>
-                            <div class="border p-3 rounded" id="loyaltyTemplatePreview">
-                                <p>Select a template to preview</p>
-                            </div>
-                            <div class="mt-3">
-                                <button class="btn btn-primary" id="sendLoyaltyMessage" disabled>Send Loyalty Message</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Analytics Section (Marketing) -->
-            <div class="content-section" id="analyticsSection">
-                <div class="row">
-                    <div class="col-md-12 mb-4">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5>Sales Reports</h5>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stats-card primary">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <select class="form-select form-select-sm d-inline-block" id="reportPeriod" style="width: auto;">
-                                        <option value="daily">Daily</option>
-                                        <option value="monthly" selected>Monthly</option>
-                                        <option value="yearly">Yearly</option>
-                                    </select>
-                                    <button class="btn btn-primary btn-sm ms-2" id="generateReport">
-                                        <i class="bi bi-arrow-clockwise"></i> Generate
-                                    </button>
+                                    <h3 class="mb-0" id="totalCustomers">0</h3>
+                                    <p class="mb-0">Total Customers</p>
                                 </div>
+                                <i class="bi bi-people fs-1"></i>
                             </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas id="salesReportChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stats-card success">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0" id="monthlyRevenue">$0</h3>
+                                    <p class="mb-0">Monthly Revenue</p>
                                 </div>
+                                <i class="bi bi-currency-dollar fs-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stats-card warning">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0" id="activeCampaigns">0</h3>
+                                    <p class="mb-0">Active Campaigns</p>
+                                </div>
+                                <i class="bi bi-megaphone fs-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="stats-card danger">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="mb-0" id="conversionRate">0%</h3>
+                                    <p class="mb-0">Conversion Rate</p>
+                                </div>
+                                <i class="bi bi-graph-up-arrow fs-1"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 mb-4">
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Customer Segmentation</h5>
+                                <h5 class="mb-0">Recent Customers</h5>
                             </div>
                             <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas id="segmentationChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Course Popularity</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <canvas id="courseChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>Customer Behavior Analysis</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-container">
+                                <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Customer Name</th>
-                                                <th>Total Purchases</th>
-                                                <th>Total Amount</th>
-                                                <th>Last Purchase Date</th>
-                                                <th>Frequency</th>
-                                                <th>Preferred Course Type</th>
+                                                <th>Name</th>
+                                                <th>Course</th>
+                                                <th>Date</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="customerBehaviorTableBody">
-                                            <!-- Customer behavior data will be added dynamically -->
+                                        <tbody id="recentCustomersTable">
+                                            <!-- Will be populated by JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Upcoming Birthdays</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Birthday</th>
+                                                <th>Course</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="upcomingBirthdaysTable">
+                                            <!-- Will be populated by JS -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -903,56 +452,446 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Add User Modal -->
-    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <!-- Customer Registration Section -->
+            <div class="content-section" id="customer-registration-section">
+                <h2 class="mb-4">Customer Registration</h2>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Register New Customer</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="customerRegistrationForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerName" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="customerName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="customerEmail" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerPhone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="customerPhone" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerBirthday" class="form-label">Birthday</label>
+                                    <input type="date" class="form-control" id="customerBirthday" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerCourse" class="form-label">Course Type</label>
+                                    <select class="form-select" id="customerCourse" required>
+                                        <option value="">Select Course</option>
+                                        <option value="excel">Advanced Excel</option>
+                                        <option value="python">Python Programming</option>
+                                        <option value="web-dev">Web Development</option>
+                                        <option value="data-science">Data Science</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerAmount" class="form-label">Course Fee ($)</label>
+                                    <input type="number" class="form-control" id="customerAmount" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="customerNotes" class="form-label">Notes</label>
+                                <textarea class="form-control" id="customerNotes" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Register Customer</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form id="addUserForm">
-                        <div class="mb-3">
-                            <label for="newUserName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="newUserName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="newUserEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="newUserEmail" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="newUserRole" class="form-label">Role</label>
-                            <select class="form-select" id="newUserRole" required>
-                                <option value="" selected disabled>Select Role</option>
-                                <option value="admin">Admin</option>
-                                <option value="marketing">Marketing</option>
-                                <option value="customer">Customer</option>
+            </div>
+
+            <!-- Customer Data Section -->
+            <div class="content-section" id="customer-data-section">
+                <h2 class="mb-4">Customer Data</h2>
+                
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">All Customers</h5>
+                        <div class="d-flex">
+                            <input type="text" class="form-control me-2" placeholder="Search customers..." id="customerSearch">
+                            <select class="form-select" id="courseFilter" style="width: auto;">
+                                <option value="">All Courses</option>
+                                <option value="excel">Advanced Excel</option>
+                                <option value="python">Python Programming</option>
+                                <option value="web-dev">Web Development</option>
+                                <option value="data-science">Data Science</option>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="newUserPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="newUserPassword" required>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover customer-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Course</th>
+                                        <th>Registration Date</th>
+                                        <th>Loyalty Points</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customerDataTable">
+                                    <!-- Will be populated by JS -->
+                                </tbody>
+                            </table>
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="saveNewUser">Save User</button>
+            </div>
+
+            <!-- WhatsApp Marketing Section -->
+            <div class="content-section" id="whatsapp-marketing-section">
+                <h2 class="mb-4">WhatsApp Marketing</h2>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Message Templates</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="template-card" data-template="offer">
+                                    <h6>Special Offer</h6>
+                                    <p class="mb-0 small">"Enroll in Advanced Excel this weekend—20% off for alumni!"</p>
+                                </div>
+                                <div class="template-card" data-template="retarget">
+                                    <h6>Retargeting</h6>
+                                    <p class="mb-0 small">"It's been 3 months since your last class—ready to continue?"</p>
+                                </div>
+                                <div class="template-card" data-template="new-course">
+                                    <h6>New Course Announcement</h6>
+                                    <p class="mb-0 small">"We're launching a new Data Science course next month. Interested?"</p>
+                                </div>
+                                <div class="template-card" data-template="referral">
+                                    <h6>Referral Program</h6>
+                                    <p class="mb-0 small">"Refer a friend and get 10% off your next course!"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Send Messages</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="whatsappRecipients" class="form-label">Selected Recipients</label>
+                                    <div class="border rounded p-2" id="selectedRecipients" style="min-height: 40px;">
+                                        <span class="text-muted">No recipients selected</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="whatsappMessage" class="form-label">Message</label>
+                                    <textarea class="form-control" id="whatsappMessage" rows="4" placeholder="Select a template or write your message..."></textarea>
+                                </div>
+                                <button class="btn btn-success" id="sendWhatsAppBtn">
+                                    <i class="bi bi-whatsapp me-2"></i>Send Message
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="mb-0">Inactive Customers</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Last Course</th>
+                                                <th>Last Activity</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="inactiveCustomersTable">
+                                            <!-- Will be populated by JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Birthday Campaigns Section -->
+            <div class="content-section" id="birthday-campaigns-section">
+                <h2 class="mb-4">Birthday and Milestone Campaigns</h2>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Birthday Templates</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="template-card" data-template="birthday">
+                                    <h6>Birthday Greeting</h6>
+                                    <p class="mb-0 small">"Happy Birthday, [Name]! 🎉 Enjoy 25% off any course this month."</p>
+                                </div>
+                                <div class="template-card" data-template="birthday-voucher">
+                                    <h6>Birthday Voucher</h6>
+                                    <p class="mb-0 small">"Happy Birthday! Here's a free class voucher as our gift to you."</p>
+                                </div>
+                                <div class="template-card" data-template="anniversary">
+                                    <h6>Anniversary</h6>
+                                    <p class="mb-0 small">"It's been 1 year since your first course! Here's a special loyalty reward."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Upcoming Birthdays</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Birthday</th>
+                                                <th>Course</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="birthdayCustomersTable">
+                                            <!-- Will be populated by JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="mb-0">Milestones</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Milestone</th>
+                                                <th>Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="milestoneCustomersTable">
+                                            <!-- Will be populated by JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loyalty Features Section -->
+            <div class="content-section" id="loyalty-features-section">
+                <h2 class="mb-4">Repeat Purchase and Loyalty Features</h2>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Loyalty Templates</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="template-card" data-template="course-progression">
+                                    <h6>Course Progression</h6>
+                                    <p class="mb-0 small">"Ready for the next level? Here's a recommendation based on your progress."</p>
+                                </div>
+                                <div class="template-card" data-template="loyalty-points">
+                                    <h6>Loyalty Points</h6>
+                                    <p class="mb-0 small">"You've earned [points] points! Redeem them for discounts or free classes."</p>
+                                </div>
+                                <div class="template-card" data-template="referral">
+                                    <h6>Referral Reward</h6>
+                                    <p class="mb-0 small">"Refer a friend and earn free sessions. Share your unique code now!"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Loyal Customers</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Courses Taken</th>
+                                                <th>Loyalty Points</th>
+                                                <th>Recommended Course</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="loyalCustomersTable">
+                                            <!-- Will be populated by JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5 class="mb-0">Referral Program</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Referral Code</th>
+                                                <th>Referrals Made</th>
+                                                <th>Reward Earned</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="referralCustomersTable">
+                                            <!-- Will be populated by JS -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <div class="content-section" id="analytics-section">
+                <h2 class="mb-4">Analytics and Smart Segmentation</h2>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Sales Report</h5>
+                                <div class="btn-group btn-group-sm mt-2" role="group">
+                                    <button type="button" class="btn btn-outline-primary active" data-period="daily">Daily</button>
+                                    <button type="button" class="btn btn-outline-primary" data-period="monthly">Monthly</button>
+                                    <button type="button" class="btn btn-outline-primary" data-period="yearly">Yearly</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="salesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Course Distribution</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="courseChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Customer Segmentation</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6>By Purchase Frequency</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Segment</th>
+                                                        <th>Count</th>
+                                                        <th>Revenue</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="frequencySegmentation">
+                                                    <!-- Will be populated by JS -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6>By Course Type</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Course</th>
+                                                        <th>Count</th>
+                                                        <th>Revenue</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="courseSegmentation">
+                                                    <!-- Will be populated by JS -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6>By Transaction Amount</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Range</th>
+                                                        <th>Count</th>
+                                                        <th>Revenue</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="amountSegmentation">
+                                                    <!-- Will be populated by JS -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Send WhatsApp Modal -->
-    <div class="modal fade" id="sendWhatsAppModal" tabindex="-1" aria-labelledby="sendWhatsAppModalLabel" aria-hidden="true">
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- WhatsApp Modal -->
+    <div class="modal fade" id="whatsappModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="sendWhatsAppModalLabel">Send WhatsApp Message</h5>
+                    <h5 class="modal-title">Send WhatsApp Message</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -965,996 +904,926 @@
                         <input type="text" class="form-control" id="recipientPhone" readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="messageContent" class="form-label">Message</label>
-                        <textarea class="form-control" id="messageContent" rows="5"></textarea>
+                        <label for="whatsappCustomMessage" class="form-label">Message</label>
+                        <textarea class="form-control" id="whatsappCustomMessage" rows="4"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success" id="sendWhatsApp">
-                        <i class="bi bi-whatsapp"></i> Send Message
+                    <button type="button" class="btn btn-success" id="sendWhatsAppMessageBtn">
+                        <i class="bi bi-whatsapp me-2"></i>Send Message
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Initialize data
-        let currentUser = null;
-        let currentRole = null;
+        // Initialize data structure
+        let customers = JSON.parse(localStorage.getItem('customers')) || [];
+        let salesData = JSON.parse(localStorage.getItem('salesData')) || {
+            daily: [],
+            monthly: [],
+            yearly: []
+        };
         let selectedTemplate = null;
-        let selectedTemplateType = null;
-        let selectedCustomerId = null;
+        let selectedRecipients = [];
+        let currentRecipient = null;
 
-        // Sample data
-        const sampleCustomers = [
-            {
-                id: 1,
-                firstName: "John",
-                lastName: "Doe",
-                email: "john.doe@example.com",
-                phone: "+1234567890",
-                birthdate: "1990-05-15",
-                location: "New York",
-                courseType: "Basic Excel",
-                joinDate: "2023-01-15",
-                totalPurchases: 3,
-                totalAmount: 450,
-                lastPurchaseDate: "2023-04-10",
-                frequency: "Regular",
-                loyaltyPoints: 150
-            },
-            {
-                id: 2,
-                firstName: "Jane",
-                lastName: "Smith",
-                email: "jane.smith@example.com",
-                phone: "+1234567891",
-                birthdate: "1985-08-22",
-                location: "Los Angeles",
-                courseType: "Advanced Excel",
-                joinDate: "2023-02-20",
-                totalPurchases: 5,
-                totalAmount: 750,
-                lastPurchaseDate: "2023-05-05",
-                frequency: "Frequent",
-                loyaltyPoints: 250
-            },
-            {
-                id: 3,
-                firstName: "Michael",
-                lastName: "Johnson",
-                email: "michael.johnson@example.com",
-                phone: "+1234567892",
-                birthdate: "1992-11-30",
-                location: "Chicago",
-                courseType: "Data Analysis",
-                joinDate: "2023-03-10",
-                totalPurchases: 2,
-                totalAmount: 300,
-                lastPurchaseDate: "2023-03-25",
-                frequency: "Occasional",
-                loyaltyPoints: 100
-            },
-            {
-                id: 4,
-                firstName: "Emily",
-                lastName: "Williams",
-                email: "emily.williams@example.com",
-                phone: "+1234567893",
-                birthdate: "1988-04-10",
-                location: "Houston",
-                courseType: "Financial Modeling",
-                joinDate: "2023-01-05",
-                totalPurchases: 4,
-                totalAmount: 600,
-                lastPurchaseDate: "2023-05-12",
-                frequency: "Regular",
-                loyaltyPoints: 200
-            },
-            {
-                id: 5,
-                firstName: "David",
-                lastName: "Brown",
-                email: "david.brown@example.com",
-                phone: "+1234567894",
-                birthdate: "1995-07-18",
-                location: "Phoenix",
-                courseType: "VBA Programming",
-                joinDate: "2023-04-01",
-                totalPurchases: 1,
-                totalAmount: 150,
-                lastPurchaseDate: "2023-04-15",
-                frequency: "New",
-                loyaltyPoints: 50
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate sample data if no data exists
+            if (customers.length === 0) {
+                generateSampleData();
             }
-        ];
-
-        const sampleUsers = [
-            { id: 1, name: "Admin User", email: "admin@example.com", role: "admin", status: "Active" },
-            { id: 2, name: "Marketing User", email: "marketing@example.com", role: "marketing", status: "Active" },
-            { id: 3, name: "Customer User", email: "customer@example.com", role: "customer", status: "Active" }
-        ];
-
-        // Initialize local storage if empty
-        if (!localStorage.getItem('customers')) {
-            localStorage.setItem('customers', JSON.stringify(sampleCustomers));
-        }
-        if (!localStorage.getItem('users')) {
-            localStorage.setItem('users', JSON.stringify(sampleUsers));
-        }
-
-        // Login functionality
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
             
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const role = document.getElementById('role').value;
+            // Update dashboard stats
+            updateDashboardStats();
             
-            // Simple authentication (in a real app, this would be server-side)
-            if ((username === 'customer' && password === 'password' && role === 'customer') ||
-                (username === 'admin' && password === 'password' && role === 'admin') ||
-                (username === 'marketing' && password === 'password' && role === 'marketing')) {
-                
-                currentUser = username;
-                currentRole = role;
-                
-                // Show dashboard
-                document.getElementById('loginPage').style.display = 'none';
-                document.getElementById('dashboardPage').style.display = 'block';
-                
-                // Update UI based on role
-                updateUIForRole();
-                
-                // Show notification
-                showNotification('Login successful!', 'success');
-            } else {
-                showNotification('Invalid credentials. Please try again.', 'error');
-            }
+            // Populate tables
+            populateCustomerDataTable();
+            populateRecentCustomersTable();
+            populateUpcomingBirthdaysTable();
+            populateInactiveCustomersTable();
+            populateBirthdayCustomersTable();
+            populateMilestoneCustomersTable();
+            populateLoyalCustomersTable();
+            populateReferralCustomersTable();
+            populateSegmentationTables();
+            
+            // Initialize charts
+            initializeCharts();
+            
+            // Set up event listeners
+            setupEventListeners();
         });
 
-        // Update UI based on role
-        function updateUIForRole() {
-            document.getElementById('userRole').textContent = `Role: ${currentRole.charAt(0).toUpperCase() + currentRole.slice(1)}`;
-            document.getElementById('currentUser').textContent = `Welcome, ${currentUser}`;
-            
-            // Hide all role-specific menu items
-            document.getElementById('registrationLink').style.display = 'none';
-            document.getElementById('myProfileLink').style.display = 'none';
-            document.getElementById('usersLink').style.display = 'none';
-            document.getElementById('customersLink').style.display = 'none';
-            document.getElementById('whatsappLink').style.display = 'none';
-            document.getElementById('birthdayLink').style.display = 'none';
-            document.getElementById('loyaltyLink').style.display = 'none';
-            document.getElementById('analyticsLink').style.display = 'none';
-            
-            // Show menu items based on role
-            if (currentRole === 'customer') {
-                document.getElementById('registrationLink').style.display = 'block';
-                document.getElementById('myProfileLink').style.display = 'block';
-            } else if (currentRole === 'admin') {
-                document.getElementById('usersLink').style.display = 'block';
-            } else if (currentRole === 'marketing') {
-                document.getElementById('customersLink').style.display = 'block';
-                document.getElementById('whatsappLink').style.display = 'block';
-                document.getElementById('birthdayLink').style.display = 'block';
-                document.getElementById('loyaltyLink').style.display = 'block';
-                document.getElementById('analyticsLink').style.display = 'block';
-            }
-            
-            // Load dashboard data
-            loadDashboardData();
-        }
-
-        // Logout functionality
-        document.getElementById('logoutLink').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            currentUser = null;
-            currentRole = null;
-            
-            // Show login page
-            document.getElementById('loginPage').style.display = 'flex';
-            document.getElementById('dashboardPage').style.display = 'none';
-            
-            // Reset form
-            document.getElementById('loginForm').reset();
-            
-            showNotification('Logged out successfully!', 'info');
-        });
-
-        // Navigation functionality
-        document.querySelectorAll('.sidebar-menu .nav-link[data-section]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Get section ID
-                const sectionId = this.getAttribute('data-section') + 'Section';
-                
-                // Hide all sections
-                document.querySelectorAll('.content-section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                
-                // Show selected section
-                document.getElementById(sectionId).classList.add('active');
-                
-                // Update active menu item
-                document.querySelectorAll('.sidebar-menu .nav-link').forEach(item => {
-                    item.classList.remove('active');
-                });
-                this.classList.add('active');
-                
-                // Update page title
-                const pageTitle = this.querySelector('span').textContent;
-                document.getElementById('pageTitle').textContent = pageTitle;
-                
-                // Load section-specific data
-                loadSectionData(sectionId);
-            });
-        });
-
-        // Load section-specific data
-        function loadSectionData(sectionId) {
-            switch(sectionId) {
-                case 'dashboardSection':
-                    loadDashboardData();
-                    break;
-                case 'customersSection':
-                    loadCustomersData();
-                    break;
-                case 'usersSection':
-                    loadUsersData();
-                    break;
-                case 'birthdaySection':
-                    loadUpcomingBirthdays();
-                    break;
-                case 'analyticsSection':
-                    loadAnalyticsData();
-                    break;
-                case 'myProfileSection':
-                    loadCustomerProfile();
-                    break;
-            }
-        }
-
-        // Load dashboard data
-        function loadDashboardData() {
-            const customers = JSON.parse(localStorage.getItem('customers')) || [];
-            
-            // Update stats
-            document.getElementById('totalCustomers').textContent = customers.length;
-            
-            // Calculate total sales
-            let totalSales = 0;
-            customers.forEach(customer => {
-                totalSales += customer.totalAmount || 0;
-            });
-            document.getElementById('totalSales').textContent = `$${totalSales}`;
-            
-            // Count active courses
-            const courseTypes = [...new Set(customers.map(customer => customer.courseType))];
-            document.getElementById('activeCourses').textContent = courseTypes.length;
-            
-            // Calculate conversion rate (mock data)
-            document.getElementById('conversionRate').textContent = '68%';
-            
-            // Load sales chart
-            loadSalesChart();
-            
-            // Load recent activities
-            loadRecentActivities();
-        }
-
-        // Load sales chart
-        function loadSalesChart() {
-            const ctx = document.getElementById('salesChart').getContext('2d');
-            
-            // Destroy existing chart if it exists
-            if (window.salesChartInstance) {
-                window.salesChartInstance.destroy();
-            }
-            
-            window.salesChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    datasets: [{
-                        label: 'Sales',
-                        data: [1200, 1900, 1500, 2500, 2200, 3000],
-                        backgroundColor: 'rgba(67, 97, 238, 0.2)',
-                        borderColor: 'rgba(67, 97, 238, 1)',
-                        borderWidth: 2,
-                        tension: 0.4,
-                        fill: true
-                    }]
+        // Generate sample data
+        function generateSampleData() {
+            const sampleCustomers = [
+                {
+                    id: 1,
+                    name: "John Smith",
+                    email: "john.smith@example.com",
+                    phone: "+1234567890",
+                    birthday: "1990-05-15",
+                    course: "excel",
+                    courseName: "Advanced Excel",
+                    registrationDate: "2023-01-15",
+                    amount: 299,
+                    loyaltyPoints: 50,
+                    lastActivity: "2023-05-10",
+                    coursesTaken: 1,
+                    referralCode: "JOHN123",
+                    referralsMade: 0,
+                    notes: "Interested in data analysis"
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value) {
-                                    return '$' + value;
-                                }
-                            }
-                        }
-                    }
+                {
+                    id: 2,
+                    name: "Emily Johnson",
+                    email: "emily.johnson@example.com",
+                    phone: "+1234567891",
+                    birthday: "1988-08-22",
+                    course: "python",
+                    courseName: "Python Programming",
+                    registrationDate: "2023-02-20",
+                    amount: 399,
+                    loyaltyPoints: 120,
+                    lastActivity: "2023-06-15",
+                    coursesTaken: 2,
+                    referralCode: "EMILY456",
+                    referralsMade: 2,
+                    notes: "Looking to advance career in tech"
+                },
+                {
+                    id: 3,
+                    name: "Michael Brown",
+                    email: "michael.brown@example.com",
+                    phone: "+1234567892",
+                    birthday: "1992-03-10",
+                    course: "web-dev",
+                    courseName: "Web Development",
+                    registrationDate: "2023-03-05",
+                    amount: 499,
+                    loyaltyPoints: 80,
+                    lastActivity: "2023-04-20",
+                    coursesTaken: 1,
+                    referralCode: "MICHAEL789",
+                    referralsMade: 1,
+                    notes: "Freelance developer"
+                },
+                {
+                    id: 4,
+                    name: "Sarah Davis",
+                    email: "sarah.davis@example.com",
+                    phone: "+1234567893",
+                    birthday: "1985-12-03",
+                    course: "data-science",
+                    courseName: "Data Science",
+                    registrationDate: "2023-01-10",
+                    amount: 599,
+                    loyaltyPoints: 200,
+                    lastActivity: "2023-06-20",
+                    coursesTaken: 3,
+                    referralCode: "SARAH012",
+                    referralsMade: 3,
+                    notes: "Data analyst at tech company"
+                },
+                {
+                    id: 5,
+                    name: "David Wilson",
+                    email: "david.wilson@example.com",
+                    phone: "+1234567894",
+                    birthday: "1995-07-18",
+                    course: "excel",
+                    courseName: "Advanced Excel",
+                    registrationDate: "2023-04-12",
+                    amount: 299,
+                    loyaltyPoints: 30,
+                    lastActivity: "2023-05-05",
+                    coursesTaken: 1,
+                    referralCode: "DAVID345",
+                    referralsMade: 0,
+                    notes: "Business analyst"
                 }
-            });
-        }
-
-        // Load recent activities
-        function loadRecentActivities() {
-            const activities = [
-                { icon: 'bi-person-plus', text: 'New customer registered: John Doe', time: '2 hours ago' },
-                { icon: 'bi-cart-check', text: 'New sale: Advanced Excel course', time: '5 hours ago' },
-                { icon: 'bi-whatsapp', text: 'WhatsApp campaign sent to 50 customers', time: '1 day ago' },
-                { icon: 'bi-gift', text: 'Birthday wishes sent to Jane Smith', time: '2 days ago' },
-                { icon: 'bi-award', text: 'Loyalty points updated for 10 customers', time: '3 days ago' }
             ];
             
-            const activityList = document.getElementById('activityList');
-            activityList.innerHTML = '';
+            customers = sampleCustomers;
+            localStorage.setItem('customers', JSON.stringify(customers));
             
-            activities.forEach(activity => {
-                const activityItem = document.createElement('div');
-                activityItem.className = 'd-flex align-items-start mb-3';
-                activityItem.innerHTML = `
-                    <div class="me-3">
-                        <i class="bi ${activity.icon} text-primary"></i>
-                    </div>
-                    <div>
-                        <p class="mb-1">${activity.text}</p>
-                        <small class="text-muted">${activity.time}</small>
-                    </div>
-                `;
-                activityList.appendChild(activityItem);
+            // Generate sample sales data
+            const today = new Date();
+            const dailySales = [];
+            const monthlySales = [];
+            const yearlySales = [];
+            
+            // Generate daily sales for the last 7 days
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toISOString().split('T')[0];
+                const amount = Math.floor(Math.random() * 1000) + 500;
+                dailySales.push({ date: dateStr, amount });
+            }
+            
+            // Generate monthly sales for the last 6 months
+            for (let i = 5; i >= 0; i--) {
+                const date = new Date(today);
+                date.setMonth(date.getMonth() - i);
+                const monthStr = date.toISOString().slice(0, 7);
+                const amount = Math.floor(Math.random() * 5000) + 2000;
+                monthlySales.push({ date: monthStr, amount });
+            }
+            
+            // Generate yearly sales for the last 3 years
+            for (let i = 2; i >= 0; i--) {
+                const date = new Date(today);
+                date.setFullYear(date.getFullYear() - i);
+                const yearStr = date.toISOString().slice(0, 4);
+                const amount = Math.floor(Math.random() * 20000) + 10000;
+                yearlySales.push({ date: yearStr, amount });
+            }
+            
+            salesData = { daily: dailySales, monthly: monthlySales, yearly: yearlySales };
+            localStorage.setItem('salesData', JSON.stringify(salesData));
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Login form
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (username === 'admin' && password === 'admin123') {
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('dashboardPage').style.display = 'block';
+                    showNotification('Login successful!', 'success');
+                } else {
+                    showNotification('Invalid username or password!', 'error');
+                }
+            });
+            
+            // Logout button
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('loginPage').style.display = 'flex';
+                document.getElementById('dashboardPage').style.display = 'none';
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+            });
+            
+            // Navigation
+            document.querySelectorAll('.nav-link[data-section]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    document.querySelectorAll('.content-section').forEach(contentSection => {
+                        contentSection.classList.remove('active');
+                    });
+                    document.getElementById(`${section}-section`).classList.add('active');
+                    
+                    // Close mobile menu
+                    document.getElementById('sidebar').classList.remove('active');
+                });
+            });
+            
+            // Mobile menu toggle
+            document.getElementById('mobileMenuToggle').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('active');
+            });
+            
+            // Customer registration form
+            document.getElementById('customerRegistrationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const newCustomer = {
+                    id: customers.length > 0 ? Math.max(...customers.map(c => c.id)) + 1 : 1,
+                    name: document.getElementById('customerName').value,
+                    email: document.getElementById('customerEmail').value,
+                    phone: document.getElementById('customerPhone').value,
+                    birthday: document.getElementById('customerBirthday').value,
+                    course: document.getElementById('customerCourse').value,
+                    courseName: getCourseName(document.getElementById('customerCourse').value),
+                    registrationDate: new Date().toISOString().split('T')[0],
+                    amount: parseFloat(document.getElementById('customerAmount').value),
+                    loyaltyPoints: 10, // Start with 10 points for new registration
+                    lastActivity: new Date().toISOString().split('T')[0],
+                    coursesTaken: 1,
+                    referralCode: generateReferralCode(document.getElementById('customerName').value),
+                    referralsMade: 0,
+                    notes: document.getElementById('customerNotes').value
+                };
+                
+                customers.push(newCustomer);
+                localStorage.setItem('customers', JSON.stringify(customers));
+                
+                // Reset form
+                this.reset();
+                
+                // Update UI
+                updateDashboardStats();
+                populateCustomerDataTable();
+                populateRecentCustomersTable();
+                populateUpcomingBirthdaysTable();
+                
+                showNotification('Customer registered successfully!', 'success');
+            });
+            
+            // Customer search
+            document.getElementById('customerSearch').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const courseFilter = document.getElementById('courseFilter').value;
+                filterCustomers(searchTerm, courseFilter);
+            });
+            
+            // Course filter
+            document.getElementById('courseFilter').addEventListener('change', function() {
+                const searchTerm = document.getElementById('customerSearch').value.toLowerCase();
+                const courseFilter = this.value;
+                filterCustomers(searchTerm, courseFilter);
+            });
+            
+            // WhatsApp template selection
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selected class from all cards
+                    document.querySelectorAll('.template-card').forEach(c => {
+                        c.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked card
+                    this.classList.add('selected');
+                    
+                    // Get template message
+                    const templateType = this.getAttribute('data-template');
+                    selectedTemplate = templateType;
+                    
+                    // Set message in textarea
+                    const messageText = this.querySelector('p').textContent;
+                    document.getElementById('whatsappMessage').value = messageText;
+                });
+            });
+            
+            // Send WhatsApp button
+            document.getElementById('sendWhatsAppBtn').addEventListener('click', function() {
+                if (selectedRecipients.length === 0) {
+                    showNotification('Please select at least one recipient!', 'error');
+                    return;
+                }
+                
+                const message = document.getElementById('whatsappMessage').value;
+                if (!message) {
+                    showNotification('Please enter a message!', 'error');
+                    return;
+                }
+                
+                // Simulate sending messages
+                selectedRecipients.forEach(recipientId => {
+                    const customer = customers.find(c => c.id === recipientId);
+                    if (customer) {
+                        // In a real app, this would integrate with WhatsApp API
+                        console.log(`Sending WhatsApp to ${customer.name} (${customer.phone}): ${message}`);
+                    }
+                });
+                
+                // Clear selections
+                selectedRecipients = [];
+                document.getElementById('selectedRecipients').innerHTML = '<span class="text-muted">No recipients selected</span>';
+                document.getElementById('whatsappMessage').value = '';
+                
+                showNotification(`Messages sent to ${selectedRecipients.length} recipients!`, 'success');
+            });
+            
+            // Send WhatsApp message in modal
+            document.getElementById('sendWhatsAppMessageBtn').addEventListener('click', function() {
+                if (!currentRecipient) return;
+                
+                const message = document.getElementById('whatsappCustomMessage').value;
+                if (!message) {
+                    showNotification('Please enter a message!', 'error');
+                    return;
+                }
+                
+                // In a real app, this would integrate with WhatsApp API
+                console.log(`Sending WhatsApp to ${currentRecipient.name} (${currentRecipient.phone}): ${message}`);
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('whatsappModal'));
+                modal.hide();
+                
+                showNotification(`Message sent to ${currentRecipient.name}!`, 'success');
+            });
+            
+            // Sales report period buttons
+            document.querySelectorAll('[data-period]').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active button
+                    document.querySelectorAll('[data-period]').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Update chart
+                    const period = this.getAttribute('data-period');
+                    updateSalesChart(period);
+                });
             });
         }
 
-        // Load customers data
-        function loadCustomersData() {
-            const customers = JSON.parse(localStorage.getItem('customers')) || [];
+        // Helper functions
+        function getCourseName(courseCode) {
+            const courseNames = {
+                'excel': 'Advanced Excel',
+                'python': 'Python Programming',
+                'web-dev': 'Web Development',
+                'data-science': 'Data Science'
+            };
+            return courseNames[courseCode] || courseCode;
+        }
+
+        function generateReferralCode(name) {
+            const nameParts = name.split(' ');
+            const firstName = nameParts[0].substring(0, 4).toUpperCase();
+            const randomNum = Math.floor(Math.random() * 1000);
+            return firstName + randomNum;
+        }
+
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.style.display = 'block';
             
-            const tableBody = document.getElementById('customersTableBody');
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function updateDashboardStats() {
+            // Total customers
+            document.getElementById('totalCustomers').textContent = customers.length;
+            
+            // Monthly revenue
+            const currentMonth = new Date().toISOString().slice(0, 7);
+            const monthlyRevenue = customers
+                .filter(c => c.registrationDate.startsWith(currentMonth))
+                .reduce((sum, c) => sum + c.amount, 0);
+            document.getElementById('monthlyRevenue').textContent = `$${monthlyRevenue}`;
+            
+            // Active campaigns (mock data)
+            document.getElementById('activeCampaigns').textContent = '3';
+            
+            // Conversion rate (mock data)
+            document.getElementById('conversionRate').textContent = '24%';
+        }
+
+        function populateCustomerDataTable() {
+            const tableBody = document.getElementById('customerDataTable');
             tableBody.innerHTML = '';
             
-            // Sort customers by join date (latest first)
-            customers.sort((a, b) => new Date(b.joinDate) - new Date(a.joinDate));
+            // Sort customers by registration date (newest first)
+            const sortedCustomers = [...customers].sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate));
             
-            customers.forEach(customer => {
+            sortedCustomers.forEach(customer => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${customer.id}</td>
-                    <td>${customer.firstName} ${customer.lastName}</td>
+                    <td>${customer.name}</td>
                     <td>${customer.email}</td>
                     <td>${customer.phone}</td>
-                    <td>${customer.location}</td>
-                    <td><span class="badge bg-primary">${customer.courseType}</span></td>
-                    <td>${customer.joinDate}</td>
+                    <td><span class="tag ${customer.course}">${customer.courseName}</span></td>
+                    <td>${customer.registrationDate}</td>
+                    <td>${customer.loyaltyPoints}</td>
                     <td>
-                        <button class="btn btn-sm whatsapp-btn send-whatsapp-btn" data-id="${customer.id}" data-name="${customer.firstName} ${customer.lastName}" data-phone="${customer.phone}">
-                            <i class="bi bi-whatsapp"></i> Send
+                        <button class="btn btn-sm whatsapp-btn" onclick="openWhatsAppModal(${customer.id})">
+                            <i class="bi bi-whatsapp"></i>
                         </button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
-            
-            // Add event listeners to WhatsApp buttons
-            document.querySelectorAll('.send-whatsapp-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectedCustomerId = this.getAttribute('data-id');
-                    const name = this.getAttribute('data-name');
-                    const phone = this.getAttribute('data-phone');
-                    
-                    document.getElementById('recipientName').value = name;
-                    document.getElementById('recipientPhone').value = phone;
-                    
-                    // Show modal
-                    const modal = new bootstrap.Modal(document.getElementById('sendWhatsAppModal'));
-                    modal.show();
-                });
-            });
         }
 
-        // Load users data
-        function loadUsersData() {
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            
-            const tableBody = document.getElementById('usersTableBody');
+        function populateRecentCustomersTable() {
+            const tableBody = document.getElementById('recentCustomersTable');
             tableBody.innerHTML = '';
             
-            users.forEach(user => {
+            // Get the 5 most recent customers
+            const recentCustomers = [...customers]
+                .sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate))
+                .slice(0, 5);
+            
+            recentCustomers.forEach(customer => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${user.id}</td>
-                    <td>${user.name}</td>
-                    <td>${user.email}</td>
-                    <td><span class="badge bg-info">${user.role}</span></td>
-                    <td><span class="badge bg-success">${user.status}</span></td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary me-1">
-                            <i class="bi bi-pencil"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
+                    <td>${customer.name}</td>
+                    <td><span class="tag ${customer.course}">${customer.courseName}</span></td>
+                    <td>${customer.registrationDate}</td>
                 `;
                 tableBody.appendChild(row);
             });
         }
 
-        // Load upcoming birthdays
-        function loadUpcomingBirthdays() {
-            const customers = JSON.parse(localStorage.getItem('customers')) || [];
-            const today = new Date();
-            const upcomingBirthdays = [];
-            
-            // Get birthdays in the next 30 days
-            customers.forEach(customer => {
-                const birthdate = new Date(customer.birthdate);
-                const thisYearBirthday = new Date(today.getFullYear(), birthdate.getMonth(), birthdate.getDate());
-                
-                // If birthday has passed this year, check next year
-                if (thisYearBirthday < today) {
-                    thisYearBirthday.setFullYear(today.getFullYear() + 1);
-                }
-                
-                const daysUntilBirthday = Math.floor((thisYearBirthday - today) / (1000 * 60 * 60 * 24));
-                
-                if (daysUntilBirthday <= 30) {
-                    upcomingBirthdays.push({
-                        ...customer,
-                        daysUntilBirthday: daysUntilBirthday
-                    });
-                }
-            });
-            
-            // Sort by days until birthday
-            upcomingBirthdays.sort((a, b) => a.daysUntilBirthday - b.daysUntilBirthday);
-            
-            const tableBody = document.getElementById('upcomingBirthdaysTableBody');
+        function populateUpcomingBirthdaysTable() {
+            const tableBody = document.getElementById('upcomingBirthdaysTable');
             tableBody.innerHTML = '';
+            
+            // Get customers with birthdays in the next 30 days
+            const today = new Date();
+            const upcomingBirthdays = customers
+                .map(customer => {
+                    const birthday = new Date(customer.birthday);
+                    const thisYearBirthday = new Date(today.getFullYear(), birthday.getMonth(), birthday.getDate());
+                    
+                    // If birthday has passed this year, use next year
+                    if (thisYearBirthday < today) {
+                        thisYearBirthday.setFullYear(today.getFullYear() + 1);
+                    }
+                    
+                    return {
+                        ...customer,
+                        daysUntilBirthday: Math.floor((thisYearBirthday - today) / (1000 * 60 * 60 * 24)),
+                        nextBirthday: thisYearBirthday.toISOString().split('T')[0]
+                    };
+                })
+                .filter(customer => customer.daysUntilBirthday <= 30)
+                .sort((a, b) => a.daysUntilBirthday - b.daysUntilBirthday)
+                .slice(0, 5);
             
             upcomingBirthdays.forEach(customer => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${customer.firstName} ${customer.lastName}</td>
-                    <td>${customer.email}</td>
-                    <td>${customer.phone}</td>
-                    <td>${customer.birthdate} (${customer.daysUntilBirthday} days)</td>
+                    <td>${customer.name}</td>
+                    <td>${customer.nextBirthday} (${customer.daysUntilBirthday} days)</td>
+                    <td><span class="tag ${customer.course}">${customer.courseName}</span></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function populateInactiveCustomersTable() {
+            const tableBody = document.getElementById('inactiveCustomersTable');
+            tableBody.innerHTML = '';
+            
+            // Get customers who haven't been active in the last 3 months
+            const threeMonthsAgo = new Date();
+            threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+            
+            const inactiveCustomers = customers
+                .filter(customer => new Date(customer.lastActivity) < threeMonthsAgo)
+                .sort((a, b) => new Date(a.lastActivity) - new Date(b.lastActivity));
+            
+            inactiveCustomers.forEach(customer => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${customer.name}</td>
+                    <td><span class="tag ${customer.course}">${customer.courseName}</span></td>
+                    <td>${customer.lastActivity}</td>
                     <td>
-                        <button class="btn btn-sm whatsapp-btn send-birthday-btn" data-id="${customer.id}" data-name="${customer.firstName} ${customer.lastName}" data-phone="${customer.phone}">
-                            <i class="bi bi-whatsapp"></i> Send
+                        <button class="btn btn-sm whatsapp-btn" onclick="openWhatsAppModal(${customer.id})">
+                            <i class="bi bi-whatsapp"></i>
                         </button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
-            
-            // Add event listeners to birthday WhatsApp buttons
-            document.querySelectorAll('.send-birthday-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectedCustomerId = this.getAttribute('data-id');
-                    const name = this.getAttribute('data-name');
-                    const phone = this.getAttribute('data-phone');
-                    
-                    document.getElementById('recipientName').value = name;
-                    document.getElementById('recipientPhone').value = phone;
-                    
-                    // Show modal
-                    const modal = new bootstrap.Modal(document.getElementById('sendWhatsAppModal'));
-                    modal.show();
-                });
-            });
         }
 
-        // Load analytics data
-        function loadAnalyticsData() {
-            loadSalesReportChart();
-            loadSegmentationChart();
-            loadCourseChart();
-            loadCustomerBehaviorTable();
-        }
-
-        // Load sales report chart
-        function loadSalesReportChart() {
-            const ctx = document.getElementById('salesReportChart').getContext('2d');
-            const period = document.getElementById('reportPeriod').value;
-            
-            // Destroy existing chart if it exists
-            if (window.salesReportChartInstance) {
-                window.salesReportChartInstance.destroy();
-            }
-            
-            let labels, data;
-            
-            if (period === 'daily') {
-                labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-                data = [420, 380, 510, 460, 590, 320, 410];
-            } else if (period === 'monthly') {
-                labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-                data = [1200, 1900, 1500, 2500, 2200, 3000];
-            } else {
-                labels = ['2019', '2020', '2021', '2022', '2023'];
-                data = [12000, 15000, 18000, 22000, 25000];
-            }
-            
-            window.salesReportChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Sales',
-                        data: data,
-                        backgroundColor: 'rgba(67, 97, 238, 0.7)',
-                        borderColor: 'rgba(67, 97, 238, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value) {
-                                    return '$' + value;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Load segmentation chart
-        function loadSegmentationChart() {
-            const ctx = document.getElementById('segmentationChart').getContext('2d');
-            
-            // Destroy existing chart if it exists
-            if (window.segmentationChartInstance) {
-                window.segmentationChartInstance.destroy();
-            }
-            
-            window.segmentationChartInstance = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['New Customers', 'Regular Customers', 'Frequent Customers', 'Inactive Customers'],
-                    datasets: [{
-                        data: [30, 40, 20, 10],
-                        backgroundColor: [
-                            'rgba(67, 97, 238, 0.7)',
-                            'rgba(6, 255, 165, 0.7)',
-                            'rgba(255, 190, 11, 0.7)',
-                            'rgba(251, 86, 7, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(67, 97, 238, 1)',
-                            'rgba(6, 255, 165, 1)',
-                            'rgba(255, 190, 11, 1)',
-                            'rgba(251, 86, 7, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
-            });
-        }
-
-        // Load course chart
-        function loadCourseChart() {
-            const ctx = document.getElementById('courseChart').getContext('2d');
-            
-            // Destroy existing chart if it exists
-            if (window.courseChartInstance) {
-                window.courseChartInstance.destroy();
-            }
-            
-            window.courseChartInstance = new Chart(ctx, {
-                type: 'polarArea',
-                data: {
-                    labels: ['Basic Excel', 'Advanced Excel', 'Data Analysis', 'Financial Modeling', 'VBA Programming'],
-                    datasets: [{
-                        data: [25, 35, 20, 15, 5],
-                        backgroundColor: [
-                            'rgba(67, 97, 238, 0.7)',
-                            'rgba(6, 255, 165, 0.7)',
-                            'rgba(255, 190, 11, 0.7)',
-                            'rgba(251, 86, 7, 0.7)',
-                            'rgba(247, 37, 133, 0.7)'
-                        ],
-                        borderColor: [
-                            'rgba(67, 97, 238, 1)',
-                            'rgba(6, 255, 165, 1)',
-                            'rgba(255, 190, 11, 1)',
-                            'rgba(251, 86, 7, 1)',
-                            'rgba(247, 37, 133, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom'
-                        }
-                    }
-                }
-            });
-        }
-
-        // Load customer behavior table
-        function loadCustomerBehaviorTable() {
-            const customers = JSON.parse(localStorage.getItem('customers')) || [];
-            
-            // Sort customers by total amount (highest first)
-            customers.sort((a, b) => (b.totalAmount || 0) - (a.totalAmount || 0));
-            
-            const tableBody = document.getElementById('customerBehaviorTableBody');
+        function populateBirthdayCustomersTable() {
+            const tableBody = document.getElementById('birthdayCustomersTable');
             tableBody.innerHTML = '';
             
-            customers.forEach(customer => {
+            // Get customers with birthdays in the next 30 days
+            const today = new Date();
+            const upcomingBirthdays = customers
+                .map(customer => {
+                    const birthday = new Date(customer.birthday);
+                    const thisYearBirthday = new Date(today.getFullYear(), birthday.getMonth(), birthday.getDate());
+                    
+                    // If birthday has passed this year, use next year
+                    if (thisYearBirthday < today) {
+                        thisYearBirthday.setFullYear(today.getFullYear() + 1);
+                    }
+                    
+                    return {
+                        ...customer,
+                        daysUntilBirthday: Math.floor((thisYearBirthday - today) / (1000 * 60 * 60 * 24)),
+                        nextBirthday: thisYearBirthday.toISOString().split('T')[0]
+                    };
+                })
+                .filter(customer => customer.daysUntilBirthday <= 30)
+                .sort((a, b) => a.daysUntilBirthday - b.daysUntilBirthday);
+            
+            upcomingBirthdays.forEach(customer => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${customer.firstName} ${customer.lastName}</td>
-                    <td>${customer.totalPurchases || 0}</td>
-                    <td>$${customer.totalAmount || 0}</td>
-                    <td>${customer.lastPurchaseDate || 'N/A'}</td>
-                    <td><span class="badge bg-info">${customer.frequency || 'New'}</span></td>
-                    <td><span class="badge bg-primary">${customer.courseType}</span></td>
+                    <td>${customer.name}</td>
+                    <td>${customer.nextBirthday} (${customer.daysUntilBirthday} days)</td>
+                    <td><span class="tag ${customer.course}">${customer.courseName}</span></td>
+                    <td>
+                        <button class="btn btn-sm whatsapp-btn" onclick="openWhatsAppModal(${customer.id})">
+                            <i class="bi bi-whatsapp"></i>
+                        </button>
+                    </td>
                 `;
                 tableBody.appendChild(row);
             });
         }
 
-        // Load customer profile
-        function loadCustomerProfile() {
-            // In a real app, this would fetch the current customer's data
-            // For demo purposes, we'll show the first customer
-            const customers = JSON.parse(localStorage.getItem('customers')) || [];
-            const customer = customers[0];
-            
-            if (customer) {
-                const profileInfo = document.getElementById('customerProfileInfo');
-                profileInfo.innerHTML = `
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Name</label>
-                            <p class="form-control-plaintext">${customer.firstName} ${customer.lastName}</p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Email</label>
-                            <p class="form-control-plaintext">${customer.email}</p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Phone</label>
-                            <p class="form-control-plaintext">${customer.phone}</p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Birthdate</label>
-                            <p class="form-control-plaintext">${customer.birthdate}</p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Location</label>
-                            <p class="form-control-plaintext">${customer.location}</p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Course Type</label>
-                            <p class="form-control-plaintext">${customer.courseType}</p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Join Date</label>
-                            <p class="form-control-plaintext">${customer.joinDate}</p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Loyalty Points</label>
-                            <p class="form-control-plaintext">${customer.loyaltyPoints || 0}</p>
-                        </div>
-                    </div>
-                    <div class="mt-3">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                            <i class="bi bi-pencil"></i> Edit Profile
-                        </button>
-                    </div>
-                `;
-            }
-        }
-
-        // Customer registration form
-        document.getElementById('customerRegistrationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const customers = JSON.parse(localStorage.getItem('customers')) || [];
-            
-            const newCustomer = {
-                id: customers.length > 0 ? Math.max(...customers.map(c => c.id)) + 1 : 1,
-                firstName: document.getElementById('firstName').value,
-                lastName: document.getElementById('lastName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                birthdate: document.getElementById('birthdate').value,
-                location: document.getElementById('location').value,
-                courseType: document.getElementById('courseType').value,
-                notes: document.getElementById('notes').value,
-                joinDate: new Date().toISOString().split('T')[0],
-                totalPurchases: 1,
-                totalAmount: 150,
-                lastPurchaseDate: new Date().toISOString().split('T')[0],
-                frequency: "New",
-                loyaltyPoints: 50
-            };
-            
-            customers.push(newCustomer);
-            localStorage.setItem('customers', JSON.stringify(customers));
-            
-            // Reset form
-            this.reset();
-            
-            // Show notification
-            showNotification('Registration successful!', 'success');
-            
-            // Update dashboard
-            loadDashboardData();
-        });
-
-        // Add user form
-        document.getElementById('saveNewUser').addEventListener('click', function() {
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            
-            const newUser = {
-                id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
-                name: document.getElementById('newUserName').value,
-                email: document.getElementById('newUserEmail').value,
-                role: document.getElementById('newUserRole').value,
-                status: "Active"
-            };
-            
-            users.push(newUser);
-            localStorage.setItem('users', JSON.stringify(users));
-            
-            // Close modal
-            const modal = bootstrap.Modal.getInstance(document.getElementById('addUserModal'));
-            modal.hide();
-            
-            // Reset form
-            document.getElementById('addUserForm').reset();
-            
-            // Show notification
-            showNotification('User added successfully!', 'success');
-            
-            // Reload users table
-            loadUsersData();
-        });
-
-        // WhatsApp template selection
-        document.querySelectorAll('.template-card').forEach(card => {
-            card.addEventListener('click', function() {
-                // Remove selected class from all cards in the same section
-                this.parentElement.querySelectorAll('.template-card').forEach(c => {
-                    c.classList.remove('selected');
-                });
-                
-                // Add selected class to this card
-                this.classList.add('selected');
-                
-                // Get template content
-                const templateContent = this.querySelector('p').textContent;
-                
-                // Update preview based on section
-                const sectionId = this.closest('.content-section').id;
-                
-                if (sectionId === 'whatsappSection') {
-                    document.getElementById('templatePreview').innerHTML = `<p>${templateContent}</p>`;
-                    document.getElementById('sendWhatsAppPromo').disabled = false;
-                    selectedTemplate = templateContent;
-                    selectedTemplateType = 'promo';
-                } else if (sectionId === 'birthdaySection') {
-                    document.getElementById('birthdayTemplatePreview').innerHTML = `<p>${templateContent}</p>`;
-                    document.getElementById('sendBirthdayMessage').disabled = false;
-                    selectedTemplate = templateContent;
-                    selectedTemplateType = 'birthday';
-                } else if (sectionId === 'loyaltySection') {
-                    document.getElementById('loyaltyTemplatePreview').innerHTML = `<p>${templateContent}</p>`;
-                    document.getElementById('sendLoyaltyMessage').disabled = false;
-                    selectedTemplate = templateContent;
-                    selectedTemplateType = 'loyalty';
-                }
-            });
-        });
-
-        // Send WhatsApp message
-        document.getElementById('sendWhatsApp').addEventListener('click', function() {
-            const messageContent = document.getElementById('messageContent').value;
-            
-            if (!messageContent) {
-                showNotification('Please enter a message', 'error');
-                return;
-            }
-            
-            // In a real app, this would integrate with WhatsApp API
-            // For demo purposes, we'll just show a notification
-            showNotification('WhatsApp message sent successfully!', 'success');
-            
-            // Close modal
-            const modal = bootstrap.Modal.getInstance(document.getElementById('sendWhatsAppModal'));
-            modal.hide();
-            
-            // Clear message
-            document.getElementById('messageContent').value = '';
-        });
-
-        // Send WhatsApp promo
-        document.getElementById('sendWhatsAppPromo').addEventListener('click', function() {
-            if (!selectedTemplate) {
-                showNotification('Please select a template', 'error');
-                return;
-            }
-            
-            // In a real app, this would integrate with WhatsApp API
-            // For demo purposes, we'll just show a notification
-            showNotification('Promo message sent to selected customers!', 'success');
-        });
-
-        // Send birthday message
-        document.getElementById('sendBirthdayMessage').addEventListener('click', function() {
-            if (!selectedTemplate) {
-                showNotification('Please select a template', 'error');
-                return;
-            }
-            
-            // In a real app, this would integrate with WhatsApp API
-            // For demo purposes, we'll just show a notification
-            showNotification('Birthday message sent successfully!', 'success');
-        });
-
-        // Send loyalty message
-        document.getElementById('sendLoyaltyMessage').addEventListener('click', function() {
-            if (!selectedTemplate) {
-                showNotification('Please select a template', 'error');
-                return;
-            }
-            
-            // In a real app, this would integrate with WhatsApp API
-            // For demo purposes, we'll just show a notification
-            showNotification('Loyalty message sent successfully!', 'success');
-        });
-
-        // Generate report
-        document.getElementById('generateReport').addEventListener('click', function() {
-            loadSalesReportChart();
-            showNotification('Report generated successfully!', 'success');
-        });
-
-        // Filter customers
-        document.getElementById('filterCustomers').addEventListener('click', function() {
-            const searchTerm = document.getElementById('customerSearch').value.toLowerCase();
-            const customers = JSON.parse(localStorage.getItem('customers')) || [];
-            
-            const filteredCustomers = customers.filter(customer => {
-                return customer.firstName.toLowerCase().includes(searchTerm) ||
-                       customer.lastName.toLowerCase().includes(searchTerm) ||
-                       customer.email.toLowerCase().includes(searchTerm) ||
-                       customer.courseType.toLowerCase().includes(searchTerm) ||
-                       customer.location.toLowerCase().includes(searchTerm);
-            });
-            
-            // Update table with filtered results
-            const tableBody = document.getElementById('customersTableBody');
+        function populateMilestoneCustomersTable() {
+            const tableBody = document.getElementById('milestoneCustomersTable');
             tableBody.innerHTML = '';
             
+            // Get customers with upcoming milestones (1 year since first course)
+            const today = new Date();
+            const upcomingMilestones = customers
+                .map(customer => {
+                    const registrationDate = new Date(customer.registrationDate);
+                    const oneYearAnniversary = new Date(registrationDate);
+                    oneYearAnniversary.setFullYear(oneYearAnniversary.getFullYear() + 1);
+                    
+                    return {
+                        ...customer,
+                        daysUntilMilestone: Math.floor((oneYearAnniversary - today) / (1000 * 60 * 60 * 24)),
+                        milestoneDate: oneYearAnniversary.toISOString().split('T')[0],
+                        milestoneType: '1 Year Anniversary'
+                    };
+                })
+                .filter(customer => customer.daysUntilMilestone <= 30 && customer.daysUntilMilestone >= 0)
+                .sort((a, b) => a.daysUntilMilestone - b.daysUntilMilestone);
+            
+            upcomingMilestones.forEach(customer => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${customer.name}</td>
+                    <td>${customer.milestoneType}</td>
+                    <td>${customer.milestoneDate} (${customer.daysUntilMilestone} days)</td>
+                    <td>
+                        <button class="btn btn-sm whatsapp-btn" onclick="openWhatsAppModal(${customer.id})">
+                            <i class="bi bi-whatsapp"></i>
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function populateLoyalCustomersTable() {
+            const tableBody = document.getElementById('loyalCustomersTable');
+            tableBody.innerHTML = '';
+            
+            // Get customers with multiple courses or high loyalty points
+            const loyalCustomers = customers
+                .filter(customer => customer.coursesTaken > 1 || customer.loyaltyPoints > 50)
+                .sort((a, b) => b.loyaltyPoints - a.loyaltyPoints);
+            
+            loyalCustomers.forEach(customer => {
+                // Recommend next course based on current course
+                let recommendedCourse = '';
+                switch (customer.course) {
+                    case 'excel':
+                        recommendedCourse = 'Data Science';
+                        break;
+                    case 'python':
+                        recommendedCourse = 'Data Science';
+                        break;
+                    case 'web-dev':
+                        recommendedCourse = 'Python Programming';
+                        break;
+                    case 'data-science':
+                        recommendedCourse = 'Advanced Excel';
+                        break;
+                    default:
+                        recommendedCourse = 'Python Programming';
+                }
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${customer.name}</td>
+                    <td>${customer.coursesTaken}</td>
+                    <td>${customer.loyaltyPoints}</td>
+                    <td>${recommendedCourse}</td>
+                    <td>
+                        <button class="btn btn-sm whatsapp-btn" onclick="openWhatsAppModal(${customer.id})">
+                            <i class="bi bi-whatsapp"></i>
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function populateReferralCustomersTable() {
+            const tableBody = document.getElementById('referralCustomersTable');
+            tableBody.innerHTML = '';
+            
+            // Get customers with referral codes
+            const referralCustomers = customers
+                .filter(customer => customer.referralCode)
+                .sort((a, b) => b.referralsMade - a.referralsMade);
+            
+            referralCustomers.forEach(customer => {
+                const rewardEarned = customer.referralsMade * 50; // $50 per referral
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${customer.name}</td>
+                    <td>${customer.referralCode}</td>
+                    <td>${customer.referralsMade}</td>
+                    <td>$${rewardEarned}</td>
+                    <td>
+                        <button class="btn btn-sm whatsapp-btn" onclick="openWhatsAppModal(${customer.id})">
+                            <i class="bi bi-whatsapp"></i>
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        function populateSegmentationTables() {
+            // Frequency segmentation
+            const frequencySegmentation = document.getElementById('frequencySegmentation');
+            frequencySegmentation.innerHTML = '';
+            
+            const oneTimeCustomers = customers.filter(c => c.coursesTaken === 1);
+            const repeatCustomers = customers.filter(c => c.coursesTaken > 1);
+            
+            const oneTimeRevenue = oneTimeCustomers.reduce((sum, c) => sum + c.amount, 0);
+            const repeatRevenue = repeatCustomers.reduce((sum, c) => sum + c.amount, 0);
+            
+            frequencySegmentation.innerHTML = `
+                <tr>
+                    <td>One-time</td>
+                    <td>${oneTimeCustomers.length}</td>
+                    <td>$${oneTimeRevenue}</td>
+                </tr>
+                <tr>
+                    <td>Repeat</td>
+                    <td>${repeatCustomers.length}</td>
+                    <td>$${repeatRevenue}</td>
+                </tr>
+            `;
+            
+            // Course segmentation
+            const courseSegmentation = document.getElementById('courseSegmentation');
+            courseSegmentation.innerHTML = '';
+            
+            const courses = ['excel', 'python', 'web-dev', 'data-science'];
+            courses.forEach(course => {
+                const courseCustomers = customers.filter(c => c.course === course);
+                const courseRevenue = courseCustomers.reduce((sum, c) => sum + c.amount, 0);
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${getCourseName(course)}</td>
+                    <td>${courseCustomers.length}</td>
+                    <td>$${courseRevenue}</td>
+                `;
+                courseSegmentation.appendChild(row);
+            });
+            
+            // Amount segmentation
+            const amountSegmentation = document.getElementById('amountSegmentation');
+            amountSegmentation.innerHTML = '';
+            
+            const lowAmountCustomers = customers.filter(c => c.amount < 300);
+            const mediumAmountCustomers = customers.filter(c => c.amount >= 300 && c.amount < 500);
+            const highAmountCustomers = customers.filter(c => c.amount >= 500);
+            
+            const lowAmountRevenue = lowAmountCustomers.reduce((sum, c) => sum + c.amount, 0);
+            const mediumAmountRevenue = mediumAmountCustomers.reduce((sum, c) => sum + c.amount, 0);
+            const highAmountRevenue = highAmountCustomers.reduce((sum, c) => sum + c.amount, 0);
+            
+            amountSegmentation.innerHTML = `
+                <tr>
+                    <td>&lt; $300</td>
+                    <td>${lowAmountCustomers.length}</td>
+                    <td>$${lowAmountRevenue}</td>
+                </tr>
+                <tr>
+                    <td>$300 - $500</td>
+                    <td>${mediumAmountCustomers.length}</td>
+                    <td>$${mediumAmountRevenue}</td>
+                </tr>
+                <tr>
+                    <td>&gt; $500</td>
+                    <td>${highAmountCustomers.length}</td>
+                    <td>$${highAmountRevenue}</td>
+                </tr>
+            `;
+        }
+
+        function filterCustomers(searchTerm, courseFilter) {
+            const tableBody = document.getElementById('customerDataTable');
+            tableBody.innerHTML = '';
+            
+            let filteredCustomers = customers;
+            
+            // Apply search filter
+            if (searchTerm) {
+                filteredCustomers = filteredCustomers.filter(customer => 
+                    customer.name.toLowerCase().includes(searchTerm) ||
+                    customer.email.toLowerCase().includes(searchTerm) ||
+                    customer.phone.includes(searchTerm)
+                );
+            }
+            
+            // Apply course filter
+            if (courseFilter) {
+                filteredCustomers = filteredCustomers.filter(customer => customer.course === courseFilter);
+            }
+            
+            // Sort by registration date (newest first)
+            filteredCustomers.sort((a, b) => new Date(b.registrationDate) - new Date(a.registrationDate));
+            
+            // Populate table
             filteredCustomers.forEach(customer => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${customer.id}</td>
-                    <td>${customer.firstName} ${customer.lastName}</td>
+                    <td>${customer.name}</td>
                     <td>${customer.email}</td>
                     <td>${customer.phone}</td>
-                    <td>${customer.location}</td>
-                    <td><span class="badge bg-primary">${customer.courseType}</span></td>
-                    <td>${customer.joinDate}</td>
+                    <td><span class="tag ${customer.course}">${customer.courseName}</span></td>
+                    <td>${customer.registrationDate}</td>
+                    <td>${customer.loyaltyPoints}</td>
                     <td>
-                        <button class="btn btn-sm whatsapp-btn send-whatsapp-btn" data-id="${customer.id}" data-name="${customer.firstName} ${customer.lastName}" data-phone="${customer.phone}">
-                            <i class="bi bi-whatsapp"></i> Send
+                        <button class="btn btn-sm whatsapp-btn" onclick="openWhatsAppModal(${customer.id})">
+                            <i class="bi bi-whatsapp"></i>
                         </button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
-            
-            // Add event listeners to WhatsApp buttons
-            document.querySelectorAll('.send-whatsapp-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    selectedCustomerId = this.getAttribute('data-id');
-                    const name = this.getAttribute('data-name');
-                    const phone = this.getAttribute('data-phone');
-                    
-                    document.getElementById('recipientName').value = name;
-                    document.getElementById('recipientPhone').value = phone;
-                    
-                    // Show modal
-                    const modal = new bootstrap.Modal(document.getElementById('sendWhatsAppModal'));
-                    modal.show();
-                });
-            });
-        });
-
-        // Toggle sidebar
-        document.getElementById('toggleSidebar').addEventListener('click', function() {
-            const sidebar = document.querySelector('.sidebar');
-            const mainContent = document.querySelector('.main-content');
-            
-            if (sidebar.style.width === '70px') {
-                sidebar.style.width = '250px';
-                mainContent.style.marginLeft = '250px';
-                
-                // Show menu text
-                document.querySelectorAll('.sidebar-menu .nav-link span').forEach(span => {
-                    span.style.display = 'inline';
-                });
-                document.querySelector('.sidebar-header h3').style.display = 'block';
-            } else {
-                sidebar.style.width = '70px';
-                mainContent.style.marginLeft = '70px';
-                
-                // Hide menu text
-                document.querySelectorAll('.sidebar-menu .nav-link span').forEach(span => {
-                    span.style.display = 'none';
-                });
-                document.querySelector('.sidebar-header h3').style.display = 'none';
-            }
-        });
-
-        // Show notification
-        function showNotification(message, type) {
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
-            
-            document.body.appendChild(notification);
-            
-            // Remove notification after animation
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
         }
 
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show login page by default
-            document.getElementById('loginPage').style.display = 'flex';
-            document.getElementById('dashboardPage').style.display = 'none';
-        });
+        function openWhatsAppModal(customerId) {
+            const customer = customers.find(c => c.id === customerId);
+            if (!customer) return;
+            
+            currentRecipient = customer;
+            document.getElementById('recipientName').value = customer.name;
+            document.getElementById('recipientPhone').value = customer.phone;
+            
+            // Set default message based on context
+            let defaultMessage = '';
+            const currentSection = document.querySelector('.content-section.active').id;
+            
+            switch (currentSection) {
+                case 'customer-data-section':
+                    defaultMessage = `Hello ${customer.name}, how are you enjoying your ${customer.courseName} course?`;
+                    break;
+                case 'birthday-campaigns-section':
+                    defaultMessage = `Happy Birthday, ${customer.name}! 🎉 Enjoy 25% off any course this month.`;
+                    break;
+                case 'loyalty-features-section':
+                    defaultMessage = `Hi ${customer.name}, you have ${customer.loyaltyPoints} loyalty points! Ready for your next course?`;
+                    break;
+                default:
+                    defaultMessage = `Hello ${customer.name},`;
+            }
+            
+            document.getElementById('whatsappCustomMessage').value = defaultMessage;
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('whatsappModal'));
+            modal.show();
+        }
+
+        function initializeCharts() {
+            // Sales chart
+            const salesCtx = document.getElementById('salesChart').getContext('2d');
+            window.salesChart = new Chart(salesCtx, {
+                type: 'line',
+                data: {
+                    labels: salesData.daily.map(d => d.date),
+                    datasets: [{
+                        label: 'Sales ($)',
+                        data: salesData.daily.map(d => d.amount),
+                        backgroundColor: 'rgba(67, 97, 238, 0.2)',
+                        borderColor: 'rgba(67, 97, 238, 1)',
+                        borderWidth: 2,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // Course distribution chart
+            const courseCtx = document.getElementById('courseChart').getContext('2d');
+            const courseCounts = {
+                'Advanced Excel': customers.filter(c => c.course === 'excel').length,
+                'Python Programming': customers.filter(c => c.course === 'python').length,
+                'Web Development': customers.filter(c => c.course === 'web-dev').length,
+                'Data Science': customers.filter(c => c.course === 'data-science').length
+            };
+            
+            window.courseChart = new Chart(courseCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(courseCounts),
+                    datasets: [{
+                        data: Object.values(courseCounts),
+                        backgroundColor: [
+                            'rgba(67, 97, 238, 0.8)',
+                            'rgba(6, 255, 165, 0.8)',
+                            'rgba(255, 190, 11, 0.8)',
+                            'rgba(251, 86, 7, 0.8)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        function updateSalesChart(period) {
+            let data = [];
+            let label = '';
+            
+            switch (period) {
+                case 'daily':
+                    data = salesData.daily;
+                    label = 'Daily Sales';
+                    break;
+                case 'monthly':
+                    data = salesData.monthly;
+                    label = 'Monthly Sales';
+                    break;
+                case 'yearly':
+                    data = salesData.yearly;
+                    label = 'Yearly Sales';
+                    break;
+            }
+            
+            window.salesChart.data.labels = data.map(d => d.date);
+            window.salesChart.data.datasets[0].data = data.map(d => d.amount);
+            window.salesChart.data.datasets[0].label = label;
+            window.salesChart.update();
+        }
     </script>
 </body>
 </html>
